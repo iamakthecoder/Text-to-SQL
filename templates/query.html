@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Results</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    min-width: 500px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    /* align-items: center; */
+}
+
+h1, h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-top: 20px;
+}
+h1{
+    font-size: 40px;
+    margin:auto;
+    text-align: center;
+    
+}
+
+p {
+    color: #ccc;
+}
+
+.error {
+    color: #ff5555;
+}
+a {
+    color: white;
+    padding:5px;
+    background-color:#4CAF50;
+    font-size:17px;
+    border-radius:5px;
+    width:150px;
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block-level element */
+    margin-top: 20px; /* Add space above the link */
+}
+
+a:hover {
+    color: #ccc; /* Text color on hover */
+}
+table {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border:1.5px solid #686767;
+    padding: 10px;
+    text-align: center;
+    font-size:15px;
+}
+
+th {
+    background-color: #333;
+}
+.table1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    max-width: 700px;
+
+}
+p{
+    font-weight: bold;
+    font-size:20px;
+    color: #4CAF50;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    max-width: 700px;
+}
+    </style>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Query Results</h1>
+        <h2>SQL Query</h2>
+        <p>{{ sql_query }}</p>
+        <h2>Results</h2>
+        {% if err %}
+            <h3 class="error"> ERROR on execution!</h3>
+            <p class="error">{{ result }}</p>
+        {% else %}
+        <div class="table1">
+            <table>
+                {% for row in result %}
+                    {% if loop.first %}
+                        <thead>
+                            <tr>
+                                {% for item in row %}
+                                    <th>{{ item }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                    {% else %}
+                        <tr>
+                            {% for item in row %}
+                                <td>{{ item }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+       
+        {% endif %}
+        <div class="submit">
+
+        <a href="/">New Query</a>
+        </div>
+    </div>
+</body>
+</html>

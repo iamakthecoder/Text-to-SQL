@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Query</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+h1, h2 {
+    color: #fff;
+}
+
+h1{
+    font-size: 40px;
+    text-align: center;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 2px solid #686767;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+}
+
+form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: center; /* Center align the content inside the form */
+}
+
+.query-section {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+}
+
+input[type="text"], input[type="submit"], input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #222;
+    color: #fff;
+}
+
+input[type="submit"] {
+    max-width: 200px;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: none;
+    font-size:20px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+input[type="text"]::placeholder {
+    color: #888;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #4CAF50;
+}
+    </style>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Database Query</h1>
+        
+        <form action="/query" method="post">
+            <h2>Select Query Tables</h2>
+            <table>
+                <tr>
+                    <th>Checkbox</th>
+                    <th>Table</th>
+                    <th>Columns</th>
+                </tr>
+                {% for table, columns in tables_columns.items() %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="tables[]" value="{{ table }}"></td>
+                    <td>{{ table }}</td>
+                    <td>{{ columns | join(", ") }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            
+            <h2>Query</h2>
+            <input type="text" name="query" placeholder="Enter your query"><br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
+
